@@ -2,7 +2,7 @@ def caesar_cipher(text, shift, mode):
     result = ""
     for char in text:
         if char.isalpha():
-            shift_amount = shift if mode == "encrypt" else -shift
+            shift_amount = shift if mode == "1" else -shift
             if char.islower():
                 result += chr(((ord(char) - 97 + shift_amount) % 26) + 97)
             else:
@@ -19,7 +19,7 @@ def vigenere_cipher(text, key, mode):
         if char.isalpha():
             key_char = key[i % key_length]
             shift = ord(key_char.lower()) - 97
-            shift_amount = shift if mode == "encrypt" else -shift
+            shift_amount = shift if mode == "1" else -shift
             if char.islower():
                 result += chr(((ord(char) - 97 + shift_amount) % 26) + 97)
             else:
@@ -33,14 +33,14 @@ def main():
     print("Welcome to the Cipher Program!")
 
     # Ask the user for encryption or decryption
-    action = input("Do you want to encrypt or decrypt? (encrypt/decrypt): ").lower()
-    if action not in ["encrypt", "decrypt"]:
+    action = input("Do you want to encrypt or decrypt? (1 for encrypt/2 for decrypt): ")
+    if action not in ["1", "2"]:
         print("Invalid choice. Please type 'encrypt' or 'decrypt'.")
         return
 
     # Ask the user for the cipher type
-    cipher_type = input("Do you want to use Caesar Cipher or Vigenère Cipher? (caesar/vigenere): ").lower()
-    if cipher_type not in ["caesar", "vigenere"]:
+    cipher_type = input("Do you want to use Caesar Cipher or Vigenère Cipher? (1 for caesar/2 for vigenere): ").lower()
+    if cipher_type not in ["1", "2"]:
         print("Invalid choice. Please type 'caesar' or 'vigenere'.")
         return
 
@@ -48,10 +48,10 @@ def main():
     text = input("Enter the text: ")
 
     # Perform the selected operation
-    if cipher_type == "caesar":
+    if cipher_type == "1":
         shift = int(input("Enter the shift value (e.g., 3): "))
         result = caesar_cipher(text, shift, action)
-    elif cipher_type == "vigenere":
+    elif cipher_type == "2":
         key = input("Enter the key: ")
         result = vigenere_cipher(text, key, action)
 
